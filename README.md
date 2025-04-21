@@ -19,7 +19,7 @@ Você informa o nome do usuário e ele mostra os repositórios com nome, linguag
 
 ## 📷 Preview
 
-![preview](preview.png) conflito
+![preview](preview.png) <-- add preview no futuro
 
 ## 🚀 Como rodar
 
