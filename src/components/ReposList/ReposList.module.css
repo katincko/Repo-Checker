@@ -1,3 +1,12 @@
+.loading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    color: #dfdfdf;
+}
+
+
 .list{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -7,16 +16,18 @@
 .listItem{
     
     padding: 16px;
-    border: 1px solid rgba(0, 0, 0, 1);
+    border: 1px solid rgb(218, 217, 217, 1);
+    color: #dfdfdf;
 }
 
 .listItemName{
     font-size: 18px;
     font-weight: bold;
+    color: #dfdfdf;
 }
 .listItemLanguage{
     font-size: 14px;
-    color: #666;
+    color: #dfdfdf;
 }
 .listItemLink{
     display: block;

@@ -23,14 +23,14 @@ const ReposList = ({nome}) => {
     return (
         <>
             {loading && (
-                <h1>Carregando...</h1>
+                <h1 className={styles.loading} >Carregando...</h1>
                 )}
 
             <ul className={styles.list}>
                 {repos.map((repo) => (
                     <li className={styles.listItem} key={repo.id}>
                         
-                        <div className={styles.listNome}>
+                        <div className={styles.listItemName}>
                             <b>Nome:</b> {repo.name}   <br/>
                     
                     </div>

@@ -8,9 +8,17 @@
     max-width: 960px;
     margin: 0 auto;
     width: 100%;
+    
 }
 
+body {
+
+    background-color: #181717;
+  }
+
 :root{
-    --corPrinciapal: #ff110094;
-    --corSecundaria: #00000059;
+    --corPrinciapal: #a51b1294;
+    --corSecundaria: #dfdfdf;
 }
+
+
