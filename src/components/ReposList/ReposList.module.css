@@ -37,3 +37,10 @@
     font-size: 14px;
 }
 
+.erro{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    color: #dfdfdf;
+}
