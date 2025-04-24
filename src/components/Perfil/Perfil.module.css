@@ -1,16 +1,127 @@
 .header{
-    background-color: var(--corPrinciapal);
+    
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 180px 0 40px 0;
 }
 
-.avatar{
+.inputContainer {
+    display: flex; /* Ativa o Flexbox */
+    align-items: stretch; /* Alinha verticalmente o input e o botão */
+    justify-content: flex-start; /* Alinha os itens à esquerda */
+    gap: 10px; /* Espaçamento entre o input e o botão */
+    width: 50%; /* Ajusta a largura do contêiner */
+    max-width: 960px; /* Define um limite de largura */
+    margin: 0 auto; /* Centraliza o contêiner */
+    gap: 0; /* Remove o espaçamento entre o input e o botão */
+    box-shadow: 0 4px 8px rgb(0, 0, 0), /* Sombra suave */
+                0 6px -0px rgb(0, 0, 0);
+    border-radius: 13px;
+    transition: box-shadow 1.5s ease;
+}
+
+.inputContainer:hover {
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.397), /* Sombra suave */
+                0 6px 20px rgba(0, 0, 0, 0.19); /* Sombra mais profunda */
+    transition: box-shadow 1.5s ease; /* Transição suave */
+
+
+    /*NAO SEI PQ ISSO FUNCIONA, MAS FUNCIONA, ENTAO DEIXA ASSIM.*/
+    .button:hover {
+        background-color: #4e4c4c; /* Cor de fundo ao passar o mouse */
+        box-shadow: 0 4px 8px rgba(255, 255, 255, 0.397), /* Sombra suave */
+                    0 6px 20px rgba(0, 0, 0, 0.19); /* Sombra mais profunda */
+        transition: background-color 1.5s ease, box-shadow 1.5s ease; /* Transição suave */
+    }
+}
+.inputWrapper {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+}
+
+.input {
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    border-radius: 13px 0px 0px 13px;
+    background-color: #393939;
+    
+    color: var(--corSecundaria);
+    font-size: 16px;
+    border: 1px solid #393939; /* Borda padrão */
+    outline: none;
+
+    transition: border-color 0.3s ease,  /* Animação suave */
+    
+}
+
+.input:focus {
+    border-color: #ffffff;
+
+}
+
+.label {
+    flex: 1;
+    position: absolute;
+    top: 50%; /* Centraliza verticalmente no input */
+    left: 10px; /* Alinha à esquerda */
+    transform: translateY(-50%); /* Ajusta o alinhamento vertical */
+    font-size: 16px;
+    color: #aaa;
+    pointer-events: none; /* Impede interação com o label */
+    transition: all 0.3s ease; /* Animação suave */
+}
+
+.input:focus + .label,
+.input:not(:placeholder-shown) + .label {
+    top: -10px; /* Move o label para cima */
+    font-size: 15px; /* Reduz o tamanho do label */
+    color: #ffffff; /* Altera a cor do label */
+}
+
+.button {
+    flex-shrink: 0; /* Impede que o botão diminua de tamanho */
+    background-color: #393939;
+   
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 0px 13px 13px 0px;
+    cursor: pointer;
+    font-size: 16px;
+    height: auto; /* Garante que o botão tenha a mesma altura do input */
+    transition: background-color 0.5s ease; /* Transição suave */
+    
+}
+
+
+
+
+
+.avatarContainer {
+    display: flex;
+    flex-direction: column; /* Alinha o avatar e o nome verticalmente */
+    align-items: center; /* Centraliza o avatar e o nome */
+    margin-top: 20px; /* Espaçamento entre o input e o avatar */
+}
+
+.avatar {
     width: 160px;
     height: 160px;
     border-radius: 50%;
-    border: 2px solid var(--secundaria);
+    border: 4px solid #4e4c4c; /* Borda branca */
+    background-color: #4e4c4c; /* Cor de fundo */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), /* Sombra suave */
+                0 6px 20px rgba(0, 0, 0, 0.19); /* Sombra mais profunda */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transições suaves */
+}
+
+.avatar:hover {
+    transform: scale(1.1); /* Aumenta o tamanho ao passar o mouse */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), /* Sombra mais intensa */
+                0 12px 40px rgba(0, 0, 0, 0.25); /* Sombra mais profunda */
 }
 
 .name{

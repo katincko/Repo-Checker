@@ -13,11 +13,11 @@
 
 body {
 
-    background-color: #181717;
+    background-color: var(--corPrincipal);
   }
 
 :root{
-    --corPrinciapal: #a51b1294;
+    --corPrincipal: #161616;
     --corSecundaria: #dfdfdf;
 }
 
