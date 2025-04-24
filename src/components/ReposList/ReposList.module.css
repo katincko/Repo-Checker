@@ -11,13 +11,26 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 16px;
+    list-style-type: none;
 }
 
 .listItem{
-    
+    border-radius:10px;
     padding: 16px;
-    border: 1px solid rgb(218, 217, 217, 1);
+    border: 1px solid #2a2a2a;
+    background-color: #2a2a2a; /* Cor de fundo dos itens da lista */
+
     color: #dfdfdf;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;/* Transições suaves */
+    margin: 0 auto; 
+    width: 100%;
+    max-width: 300px; /* Largura máxima para cada item */
+}
+
+.listItem:hover {
+    transform: scale(1.1); /* Aumenta o tamanho ao passar o mouse */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), /* Sombra mais intensa */
+                0 12px 40px rgba(0, 0, 0, 0.25); /* Sombra mais profunda */
 }
 
 .listItemName{
@@ -27,7 +40,7 @@
 }
 .listItemLanguage{
     font-size: 14px;
-    color: #dfdfdf;
+    color: #393939;
 }
 .listItemLink{
     display: block;
@@ -43,4 +56,35 @@
     align-items: center;
     height: 10vh;
     color: #dfdfdf;
+}
+
+.languageStats {
+    margin-top: 10px;
+}
+
+.languageBarContainer {
+    display: flex;
+    height: 20px;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: #2a2a2a;
+    margin-top: 5px;
+}
+
+.languageBar {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.languageLabel {
+    padding: 0 5px;
+    font-size: 10px;
+    color: #fff;
 }

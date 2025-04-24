@@ -1,12 +1,34 @@
 import { useEffect , useState } from "react";
 import styles from './ReposList.module.css';
 
+// Define as cores para cada linguagem
+const getColorForLanguage = (language) => {
+    const colors = {
+        JavaScript: "#f1e05a",
+        Python: "#3572A5",
+        HTML: "#e34c26",
+        CSS: "#563d7c",
+        TypeScript: "#2b7489",
+        Java: "#b07219",
+        C: "#555555",
+        "C++": "#f34b7d",
+        PHP: "#4F5D95",
+        Ruby: "#701516",
+        Go: "#00ADD8",
+        Shell: "#89e051",
+        // Adicione mais linguagens e cores aqui
+    };
 
-const ReposList = ({nome , buscarRepos , setBuscarRepos}) => {
+    return colors[language] || "#ccc"; // Cor padrão para linguagens desconhecidas
+};
+
+
+const ReposList = ({erro, setErro, nome , buscarRepos , setBuscarRepos}) => {
     const [repos, setRepos] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [erro, setErro] = useState("");
-    console.log(nome);
+    const [loading, setLoading] = useState(false);
+    const [languages, setLanguages] = useState({});
+    const GITHUB_TOKEN = "TOKEN AQUI"; // Substitua pelo seu token do GitHub
+    //console.log(nome); //comentei pra não poluir o console
 
 
     useEffect(() => {
@@ -14,12 +36,18 @@ const ReposList = ({nome , buscarRepos , setBuscarRepos}) => {
             setLoading(true);
             setRepos([]);
             setErro("");
-            fetch(`https://api.github.com/users/${nome}/repos`)
+            fetch(`https://api.github.com/users/${nome}/repos`, {
+                headers: {
+                    Authorization: `Bearer ${GITHUB_TOKEN}`,
+                },
+            })
+
+            
             .then(response => {
                 console.log("Resposta da API:", response); 
 
                 if (!response.ok) {
-
+                    
                     if (response.status === 403) {
                         setErro("Usuário atingiu o limite de requisições. Tente novamente mais tarde.");
                     } 
@@ -38,15 +66,32 @@ const ReposList = ({nome , buscarRepos , setBuscarRepos}) => {
                 return response.json();
             }
             )                                                                                                                                                                                                                                              
-            .then(resJson => {
+            .then(async (resJson) => {
+                const languagesData = {};
+                for (const repo of resJson) {
+                    const langResponse = await fetch(repo.languages_url, {
+                        headers: {
+                            Authorization: `Bearer ${GITHUB_TOKEN}`,
+                        },
+                    });
+                    const langJson = await langResponse.json();
+
+                    // Calcula as porcentagens
+                    const totalBytes = Object.values(langJson).reduce((acc, b) => acc + b, 0);
+                    const percentages = Object.entries(langJson).map(([lang, bytes]) => ({
+                        language: lang,
+                        percentage: ((bytes / totalBytes) * 100).toFixed(2),
+                    }));
+
+                    languagesData[repo.id] = percentages;
+                }
+                setLanguages(languagesData);
+
                 setTimeout(() => {
-                    // Simulando um atraso de 3 segundos
-                    // para demonstrar o uso do setTimeout
                     setRepos(resJson);
                     setLoading(false);
                     setBuscarRepos(false);
-                    
-            },1000);
+                }, 1000);
             })
             .catch((error) => {
                 setLoading(false);
@@ -62,31 +107,53 @@ const ReposList = ({nome , buscarRepos , setBuscarRepos}) => {
     }, [nome, buscarRepos , setBuscarRepos]);
     return (
         <>
-            {loading && (
-                <h1 className={styles.loading} >Carregando...</h1>
-                )}
-            {erro &&  <h1 className={styles.erro}>{erro}</h1>}
+            {loading && <h1 className={styles.loading}>Carregando...</h1>}
+
+            {erro && <h1 className={styles.erro}>{erro}</h1>}
+
             <ul className={styles.list}>
+
                 {repos.map((repo) => (
+
                     <li className={styles.listItem} key={repo.id}>
-                        
+
                         <div className={styles.listItemName}>
-                            <b>Nome:</b> {repo.name}   <br/>
-                    
-                    </div>
-                        <div className={styles.listItemLanguage}>
-                            <b>linguagem:</b> {repo.language} <br/>
+                            <b>Nome:</b> {repo.name} <br />
                         </div>
-                        <a className={styles.listItemLink} target="_blank" href={repo.html_url}>Visitar no site</a> 
+
+
+                        <div className={styles.listItemLanguage}>
+                            <b>Linguagem Principal:</b> {repo.language} <br />
+                        </div>
+
+
+                        <div className={styles.languageStats}>
+                            {languages[repo.id] && (
+                                <div className={styles.languageBarContainer}>
+                                    {languages[repo.id].map(({ language, percentage }) => (
+                                        <div
+                                            key={language}
+                                            className={styles.languageBar}
+                                            style={{ width: `${percentage}%`, backgroundColor: getColorForLanguage(language) }}
+                                        >
+                                            <span className={styles.languageLabel}>{language} ({percentage}%)</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+
+
+                        <a className={styles.listItemLink} target="_blank" href={repo.html_url} rel="noopener noreferrer">
+                            Visitar no site
+                        </a>
+
+                        
                     </li>
                 ))}
-                
-                
             </ul>
-        
         </>
-    )
-
-}
+    );
+};
 
 export default ReposList;
