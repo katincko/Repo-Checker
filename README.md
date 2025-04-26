@@ -18,8 +18,7 @@ Você informa o nome do usuário e ele mostra os repositórios com nome, linguag
 - CSS
 
 ## 📷 Preview
-
-![preview](preview.png) <-- add preview no futuro
+<a href="https://ibb.co/5WVb5Rvg"><img src="https://i.ibb.co/ccd4NrtS/preview-RC.jpg" alt="preview-RC" border="0"></a>
 
 ## 🚀 Como rodar
 
