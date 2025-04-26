@@ -1,5 +1,5 @@
 //import './perfil.css'
-import styles from './perfil.module.css';
+import styles from './Perfil.module.css';
 import { useState } from 'react';
 
 const Perfil = ({ nome, setNome , setBuscarRepos , setErro}) => {
