@@ -34,7 +34,7 @@ const Perfil = ({ nome, setNome , setBuscarRepos , setErro}) => {
                     {/* é foda, esse input muda o inputvalue e atribui o valor no inputvalue.*/}
                     <input className={styles.input} placeholder=''  onKeyDown={(e) => e.key === "Enter" && handleClick(e)} onChange={(e) => setInputValue(e.target.value)} value={inputValue} id='user' type="text" autoComplete='off'/>
                     <label htmlFor="user" className={styles.label}>
-                            Coloque seu usuário do GitHub aqui.
+                            Seu usuário do GitHub:
                     </label>
                 </div>
                 

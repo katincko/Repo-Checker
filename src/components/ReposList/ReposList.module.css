@@ -41,13 +41,7 @@
     font-size: 14px;
     color: #dfdfdf;
 }
-.listItemLink{
-    display: block;
-    text-decoration: none;
-    background-color: #ff0505e1;
-    color: #ffffff;
-    font-size: 14px;
-}
+
 
 
 
@@ -59,7 +53,6 @@
     height: 10vh;
     color: #dfdfdf;
 }
-
 
 
 
@@ -100,4 +93,70 @@
     color: aqua;
 }
 
+/* Ajustes para telas menores (celulares e tablets) */
+@media (max-width: 768px) {
+    .list {
+        grid-template-columns: 1fr; /* Cada item ocupa uma linha inteira */
+        gap: 12px; /* Reduz o espaçamento entre os itens */
+    }
+
+    .listItem {
+        max-width: 100%; /* Remove o limite de largura */
+        padding: 12px; /* Reduz o espaçamento interno */
+        font-size: 14px; /* Ajusta o tamanho da fonte */
+    }
+
+    .listItemName {
+        font-size: 16px; /* Reduz o tamanho da fonte */
+    }
+
+    .listItemLanguage {
+        font-size: 12px; /* Reduz o tamanho da fonte */
+    }
+
+    .listItemLink {
+        font-size: 12px; /* Ajusta o tamanho da fonte */
+        padding: 8px; /* Ajusta o espaçamento interno */
+    }
+
+    .languageStats {
+        padding: 8px; /* Reduz o espaçamento interno */
+    }
+
+    .languageBarContainer {
+        height: 15px; /* Reduz a altura da barra */
+    }
+
+    .languageBar {
+        font-size: 10px; /* Ajusta o tamanho da fonte */
+    }
+}
+
+/* Ajustes para telas muito pequenas (ex.: 480px) */
+@media (max-width: 480px) {
+    .listItem {
+        padding: 10px; /* Reduz ainda mais o espaçamento interno */
+    }
+
+    .listItemName {
+        font-size: 14px; /* Ajusta o tamanho da fonte */
+    }
+
+    .listItemLanguage {
+        font-size: 10px; /* Ajusta o tamanho da fonte */
+    }
+
+    .listItemLink {
+        font-size: 10px; /* Ajusta o tamanho da fonte */
+        padding: 6px; /* Ajusta o espaçamento interno */
+    }
+
+    .languageBarContainer {
+        height: 10px; /* Reduz ainda mais a altura da barra */
+    }
+
+    .languageBar {
+        font-size: 8px; /* Ajusta o tamanho da fonte */
+    }
+}
 ul{list-style: none;}
