@@ -111,11 +111,16 @@
     width: 160px;
     height: 160px;
     border-radius: 50%;
-    border: 4px solid #4e4c4c; /* Borda branca */
+    border: 4px solid transparent; /* Borda branca */
     background-color: #4e4c4c; /* Cor de fundo */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), /* Sombra suave */
                 0 6px 20px rgba(0, 0, 0, 0.19); /* Sombra mais profunda */
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transições suaves */
+}
+
+.avatarContainer a {
+    text-decoration: none; /* Remove o sublinhado */
+    color: #4e4c4c; /* Herda a cor do elemento pai */
 }
 
 .avatar:hover {
