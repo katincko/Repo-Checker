@@ -27,7 +27,7 @@ const ReposList = ({erro, setErro, nome , buscarRepos , setBuscarRepos}) => {
     const [repos, setRepos] = useState([]);
     const [loading, setLoading] = useState(false);
     const [languages, setLanguages] = useState({});
-    const GITHUB_TOKEN = "Token aqui."; // Substitua pelo seu token do GitHub
+    const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN; 
     //console.log(nome); //comentei pra não poluir o console
 
 
