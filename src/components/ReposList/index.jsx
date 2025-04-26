@@ -27,7 +27,7 @@ const ReposList = ({erro, setErro, nome , buscarRepos , setBuscarRepos}) => {
     const [repos, setRepos] = useState([]);
     const [loading, setLoading] = useState(false);
     const [languages, setLanguages] = useState({});
-    const GITHUB_TOKEN = "TOKEN AQUI"; // Substitua pelo seu token do GitHub
+    const GITHUB_TOKEN = "Token aqui."; // Substitua pelo seu token do GitHub
     //console.log(nome); //comentei pra não poluir o console
 
 
@@ -36,6 +36,7 @@ const ReposList = ({erro, setErro, nome , buscarRepos , setBuscarRepos}) => {
             setLoading(true);
             setRepos([]);
             setErro("");
+            
             fetch(`https://api.github.com/users/${nome}/repos`, {
                 headers: {
                     Authorization: `Bearer ${GITHUB_TOKEN}`,
@@ -45,7 +46,7 @@ const ReposList = ({erro, setErro, nome , buscarRepos , setBuscarRepos}) => {
             
             .then(response => {
                 console.log("Resposta da API:", response); 
-
+                
                 if (!response.ok) {
                     
                     if (response.status === 403) {
@@ -68,30 +69,38 @@ const ReposList = ({erro, setErro, nome , buscarRepos , setBuscarRepos}) => {
             )                                                                                                                                                                                                                                              
             .then(async (resJson) => {
                 const languagesData = {};
-                for (const repo of resJson) {
-                    const langResponse = await fetch(repo.languages_url, {
-                        headers: {
-                            Authorization: `Bearer ${GITHUB_TOKEN}`,
-                        },
-                    });
-                    const langJson = await langResponse.json();
+                const updatedRepos = await Promise.all(
+                    resJson.map(async (repo) => {
+                        const langResponse = await fetch(repo.languages_url, {
+                            headers: {
+                                Authorization: `Bearer ${GITHUB_TOKEN}`,
+                            },
+                        });
+                        const langJson = await langResponse.json();
 
-                    // Calcula as porcentagens
-                    const totalBytes = Object.values(langJson).reduce((acc, b) => acc + b, 0);
-                    const percentages = Object.entries(langJson).map(([lang, bytes]) => ({
-                        language: lang,
-                        percentage: ((bytes / totalBytes) * 100).toFixed(2),
-                    }));
+                        // Define a linguagem principal
+                        const lingPrincipal = repo.language || "Sem linguagem principal definida";
 
-                    languagesData[repo.id] = percentages;
-                }
+                        // Calcula as porcentagens
+                        const totalBytes = Object.values(langJson).reduce((acc, b) => acc + b, 0);
+                        const percentages = Object.entries(langJson).map(([lang, bytes]) => ({
+                            language: lang,
+                            percentage: ((bytes / totalBytes) * 100).toFixed(2),
+                        }));
+
+                        // Armazena os dados de linguagem
+                        languagesData[repo.id] = percentages;
+
+                        // Retorna o repositório atualizado com a linguagem principal
+                        return { ...repo, lingPrincipal };
+                    })
+                );
+
                 setLanguages(languagesData);
-
-                setTimeout(() => {
-                    setRepos(resJson);
-                    setLoading(false);
-                    setBuscarRepos(false);
-                }, 1000);
+                setRepos(updatedRepos);
+                setLoading(false);
+                setBuscarRepos(false);
+                
             })
             .catch((error) => {
                 setLoading(false);
@@ -111,11 +120,16 @@ const ReposList = ({erro, setErro, nome , buscarRepos , setBuscarRepos}) => {
 
             {erro && <h1 className={styles.erro}>{erro}</h1>}
 
+                
             <ul className={styles.list}>
-
+                {/* cria um "objeto" pra cada linguagem*/}
                 {repos.map((repo) => (
 
-                    <li className={styles.listItem} key={repo.id}>
+                    <li className={styles.listItem}
+                     key={repo.id}
+                     onClick={() => window.open(repo.html_url, "_blank")} // Abre o link em uma nova aba
+                     style={{ cursor: "pointer" }} // Adiciona um cursor de "mão" para indicar que é clicável
+                     >
 
                         <div className={styles.listItemName}>
                             <b>Nome:</b> {repo.name} <br />
@@ -123,29 +137,57 @@ const ReposList = ({erro, setErro, nome , buscarRepos , setBuscarRepos}) => {
 
 
                         <div className={styles.listItemLanguage}>
-                            <b>Linguagem Principal:</b> {repo.language} <br />
+                            <b>Linguagem Principal:</b> {repo.lingPrincipal} <br />
                         </div>
 
-
+                        {/* Essa bosta aq faz as barras das linguagens */}
                         <div className={styles.languageStats}>
                             {languages[repo.id] && (
                                 <div className={styles.languageBarContainer}>
                                     {languages[repo.id].map(({ language, percentage }) => (
                                         <div
-                                            key={language}
-                                            className={styles.languageBar}
-                                            style={{ width: `${percentage}%`, backgroundColor: getColorForLanguage(language) }}
+                                        key={language}
+                                        className={styles.languageBar}
+                                        style={{ width: `${percentage}%`, backgroundColor: getColorForLanguage(language) }}
                                         >
-                                            <span className={styles.languageLabel}>{language} ({percentage}%)</span>
+                                        
                                         </div>
                                     ))}
                                 </div>
                             )}
                         </div>
 
+                        {/* Essa bosta aq faz  as bolinhas e a porcentagem das linguagens.*/}
+                        <div>
+                            {languages[repo.id] &&(
+                                <div>
+                                    {languages[repo.id].map(({ language, percentage }) => (
+                                        <div key = {language} style={{display: "flex"}} >
+                                            
+                                            <div style={{
+                                                width: '5%' , 
+                                                padding: "7px",
+                                                height: '10px',
+                                                marginBottom: '5px',
+                                                borderRadius: "100%",
+                                                gap: '10px',
+                                                border: '2px solid #cac9c9a9',
+                                                borderTopLeftRadius: '100%', 
+                                                borderTopRightRadius: '100%' ,
+                                                borderEndEndRadius: '100%' , 
+                                                borderStartEndRadius: '100%',
+                                                backgroundColor: getColorForLanguage(language)}}> </div>
 
+                                            <div >
+                                                <p> - {language} ({percentage}%)</p>   
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
                         <a className={styles.listItemLink} target="_blank" href={repo.html_url} rel="noopener noreferrer">
-                            Visitar no site
+                        
                         </a>
 
                         
