@@ -27,7 +27,7 @@ const ReposList = ({erro, setErro, nome , buscarRepos , setBuscarRepos}) => {
     const [repos, setRepos] = useState([]);
     const [loading, setLoading] = useState(false);
     const [languages, setLanguages] = useState({});
-    const GITHUB_TOKEN = "TOKEN AQUI"; // Substitua pelo seu token do GitHub
+    const GITHUB_TOKEN = ""; // Substitua pelo seu token do GitHub
     //console.log(nome); //comentei pra não poluir o console
 
 
@@ -111,6 +111,7 @@ const ReposList = ({erro, setErro, nome , buscarRepos , setBuscarRepos}) => {
 
             {erro && <h1 className={styles.erro}>{erro}</h1>}
 
+                
             <ul className={styles.list}>
 
                 {repos.map((repo) => (
@@ -132,20 +133,45 @@ const ReposList = ({erro, setErro, nome , buscarRepos , setBuscarRepos}) => {
                                 <div className={styles.languageBarContainer}>
                                     {languages[repo.id].map(({ language, percentage }) => (
                                         <div
-                                            key={language}
-                                            className={styles.languageBar}
-                                            style={{ width: `${percentage}%`, backgroundColor: getColorForLanguage(language) }}
+                                        key={language}
+                                        className={styles.languageBar}
+                                        style={{ width: `${percentage}%`, backgroundColor: getColorForLanguage(language) }}
                                         >
-                                            <span className={styles.languageLabel}>{language} ({percentage}%)</span>
+                                        
                                         </div>
                                     ))}
                                 </div>
                             )}
                         </div>
+                        <div>
+                            {languages[repo.id] &&(
+                                <div>
+                                    {languages[repo.id].map(({ language, percentage }) => (
+                                        <div key = {language} style={{display: "flex"}} >
+                                            
+                                            <div style={{
+                                                width: '5%' , 
+                                                padding: "8px",
+                                                height: '10px',
+                                                borderRadius: "100%",
+                                                gap: '10px',
+                                                border: '2px solid #cac9c9a9',
+                                                borderTopLeftRadius: '100%', 
+                                                borderTopRightRadius: '100%' ,
+                                                borderEndEndRadius: '100%' , 
+                                                borderStartEndRadius: '100%',
+                                                backgroundColor: getColorForLanguage(language)}}> </div>
 
-
+                                            <div >
+                                                <p> - {language} ({percentage}%)</p>   
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
                         <a className={styles.listItemLink} target="_blank" href={repo.html_url} rel="noopener noreferrer">
-                            Visitar no site
+                        
                         </a>
 
                         
