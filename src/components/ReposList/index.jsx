@@ -29,7 +29,6 @@ const ReposList = ({erro, setErro, nome , buscarRepos , setBuscarRepos}) => {
     const [languages, setLanguages] = useState({});
     const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN; 
     //console.log(nome); //comentei pra não poluir o console
-   
 
     useEffect(() => {
         if (buscarRepos && nome !== "") {
@@ -186,9 +185,7 @@ const ReposList = ({erro, setErro, nome , buscarRepos , setBuscarRepos}) => {
                                 </div>
                             )}
                         </div>
-                        <a className={styles.listItemLink} target="_blank" href={repo.html_url} rel="noopener noreferrer">
                         
-                        </a>
 
                         
                     </li>
