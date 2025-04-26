@@ -136,3 +136,69 @@
     color: #dfdfdf;
     text-align: center;
 }
+
+/* Ajustes para telas menores (celulares) */
+@media (max-width: 768px) {
+    .header {
+        padding: 100px 0 20px 0; /* Reduz o espaçamento vertical */
+    }
+
+    .inputContainer {
+        width: 90%; /* Aumenta a largura do input para ocupar mais espaço */
+        max-width: none; /* Remove o limite de largura */
+        flex-direction: column; /* Alinha o input e o botão verticalmente */
+        gap: 10px; /* Adiciona espaçamento entre os elementos */
+    }
+
+    .input {
+        font-size: 18px; /* Aumenta o tamanho da fonte */
+        padding: 15px; /* Aumenta o espaçamento interno */
+        border-radius: 13px; /* Ajusta o arredondamento */
+    }
+
+    .button {
+        font-size: 18px; /* Aumenta o tamanho da fonte */
+        padding: 15px; /* Aumenta o espaçamento interno */
+        border-radius: 13px; /* Ajusta o arredondamento */
+        width: 100%; /* Faz o botão ocupar toda a largura */
+    }
+
+    .avatarContainer {
+        margin-top: 10px; /* Reduz o espaçamento superior */
+    }
+
+    .avatar {
+        width: 120px; /* Reduz o tamanho do avatar */
+        height: 120px; /* Reduz o tamanho do avatar */
+    }
+
+    .name {
+        font-size: 24px; /* Reduz o tamanho da fonte do nome */
+    }
+}
+
+/* Ajustes para telas muito pequenas (ex.: 480px) */
+@media (max-width: 480px) {
+    .header {
+        padding: 80px 0 10px 0; /* Reduz ainda mais o espaçamento vertical */
+    }
+
+    .input {
+        font-size: 16px; /* Ajusta o tamanho da fonte */
+        padding: 10px; /* Ajusta o espaçamento interno */
+    }
+
+    .button {
+        font-size: 16px; /* Ajusta o tamanho da fonte */
+        padding: 10px; /* Ajusta o espaçamento interno */
+    }
+
+    .avatar {
+        width: 100px; /* Reduz ainda mais o tamanho do avatar */
+        height: 100px; /* Reduz ainda mais o tamanho do avatar */
+    }
+
+    .name {
+        font-size: 20px; /* Ajusta o tamanho da fonte do nome */
+    }
+}
