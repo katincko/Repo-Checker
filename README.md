@@ -3,6 +3,8 @@
 Projeto feito em **React** para exibir repositórios do GitHub de forma visual e interativa.  
 Você informa o nome do usuário e ele mostra os repositórios com nome, linguagem e link para visitar o site.
 
+<br>Link do projeto: https://repo-checker.vercel.app/
+
 ## 💻 Funcionalidades
 
 - Buscar repositórios pelo nome do usuário
