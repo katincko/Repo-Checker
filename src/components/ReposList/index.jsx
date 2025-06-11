@@ -140,24 +140,23 @@ const ReposList = ({erro, setErro, nome , buscarRepos , setBuscarRepos}) => {
                             <b>Linguagem Principal:</b> {repo.lingPrincipal} <br />
                         </div>
 
-                        {/* Essa bosta aq faz as barras das linguagens */}
+                        {/* Essa parte faz as barras das linguagens */}
                         <div className={styles.languageStats}>
                             {languages[repo.id] && (
                                 <div className={styles.languageBarContainer}>
                                     {languages[repo.id].map(({ language, percentage }) => (
                                         <div
-                                        key={language}
-                                        className={styles.languageBar}
-                                        style={{ width: `${percentage}%`, backgroundColor: getColorForLanguage(language) }}
+                                            key={language}
+                                            className={styles.languageBar}
+                                            style={{ width: `${percentage}%`, backgroundColor: getColorForLanguage(language) }}
                                         >
-                                        
                                         </div>
                                     ))}
                                 </div>
                             )}
                         </div>
 
-                        {/* Essa bosta aq faz  as bolinhas e a porcentagem das linguagens.*/}
+                        {/* Essa parte faz as bolinhas e a porcentagem das linguagens */}
                         <div>
                             {languages[repo.id] &&(
                                 <div>
@@ -178,8 +177,7 @@ const ReposList = ({erro, setErro, nome , buscarRepos , setBuscarRepos}) => {
                                                 borderStartEndRadius: '100%',
                                                 backgroundColor: getColorForLanguage(language)}}> </div>
 
-                                            <div >
-                                                // eslint-disable-next-line no-irregular-whitespace
+                                            <div>
                                                 <p> - {language} ({percentage}%)</p>   
                                             </div>
                                         </div>
