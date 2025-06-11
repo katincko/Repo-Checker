@@ -161,6 +161,7 @@
         padding: 15px; /* Aumenta o espaçamento interno */
         border-radius: 13px; /* Ajusta o arredondamento */
         width: 100%; /* Faz o botão ocupar toda a largura */
+        margin-top: 10px; /* Adiciona margem superior */
     }
 
     .avatarContainer {
