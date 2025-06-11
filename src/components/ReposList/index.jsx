@@ -1,3 +1,4 @@
+/* eslint-disable no-irregular-whitespace */
 import { useEffect , useState } from "react";
 import styles from './ReposList.module.css';
 
@@ -101,7 +102,7 @@ const ReposList = ({erro, setErro, nome , buscarRepos , setBuscarRepos}) => {
                 setBuscarRepos(false);
                 
             })
-            .catch((error) => {
+            .catch((erro) => {
                 setLoading(false);
                 setBuscarRepos(false);
                 
@@ -112,7 +113,7 @@ const ReposList = ({erro, setErro, nome , buscarRepos , setBuscarRepos}) => {
                 
         }
         
-    }, [nome, buscarRepos , setBuscarRepos]);
+    }, [nome, buscarRepos, setBuscarRepos, setErro, GITHUB_TOKEN, erro]);
     return (
         <>
             {loading && <h1 className={styles.loading}>Carregando...</h1>}
@@ -178,6 +179,7 @@ const ReposList = ({erro, setErro, nome , buscarRepos , setBuscarRepos}) => {
                                                 backgroundColor: getColorForLanguage(language)}}> </div>
 
                                             <div >
+                                                // eslint-disable-next-line no-irregular-whitespace
                                                 <p> - {language} ({percentage}%)</p>   
                                             </div>
                                         </div>

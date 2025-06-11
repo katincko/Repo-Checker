@@ -5,6 +5,7 @@ import { useState } from 'react';
 const Perfil = ({ nome, setNome , setBuscarRepos , setErro}) => {
     //declara o estado do input, que é o valor que o usuario vai digitar.
     const [inputValue, setInputValue] = useState("")
+    const [imgErro, setImgErro] = useState(false);
     
     function handleClick(e){
         //faz com que o valor do input seja atribuido ao setNome
@@ -43,10 +44,21 @@ const Perfil = ({ nome, setNome , setBuscarRepos , setErro}) => {
             </div>
 
             <div className={styles.avatarContainer}>
-                <a href = {`https://github.com/${nome}`}  target = "_blank"  > 
-                    <img  className={styles.avatar} src={`https://github.com/${nome}.png`}  /> 
+                <a href={`https://github.com/${nome}`} target="_blank" rel="noopener noreferrer">
+                    {(!nome || imgErro) ? (
+                        <div
+                            className={styles.avatar}
+                            style={{ backgroundColor: "#4e4c4c" }}
+                        />
+                    ) : (
+                        <img
+                            className={styles.avatar}
+                            src={`https://github.com/${nome}.png`}
+                            alt={`Avatar de ${nome}`}
+                            onError={() => setImgErro(true)}
+                        />
+                    )}
                 </a>
-
                 <h3 className={styles.name}>{nome}</h3>
             </div>
         </header>
